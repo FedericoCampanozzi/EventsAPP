@@ -5,3 +5,4 @@ dist
 .env.local
 environments
 package-lock.json
+.angular/cache/*
