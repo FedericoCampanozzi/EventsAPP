@@ -1,0 +1,159 @@
+<div class="container-fluid">
+    <div>
+        <p>
+            Events Table
+        </p>
+    </div>
+    <table class="table table-hover bk-lightgray">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Event Type</th>
+                <th>Date Start</th>
+                <th>Date End</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let event of events; let idx = index;">
+                <td>
+                    {{ event.ID }}
+                    <button type="button" class="btn btn-ligh" (click)="showDetail(event.ID)" data-toggle="modal"
+                    data-target="#eventDetail">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </button>
+                </td>
+
+                <!-- ROW IN EDIT MODE -->
+                <td *ngIf="idxEventToUpdate == idx">
+                    <input class="form-control form-control" type="text" placeholder="Title" value="{{newEvent.Title}}">
+                </td>
+                <td *ngIf="idxEventToUpdate == idx">
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" (input)="setData(2,$event)">
+                        <option *ngFor="let eventType of eventsType" value="{{eventType.ID}}">{{eventType.TypeName}}</option>
+                    </select>
+                </td>
+                <td *ngIf="idxEventToUpdate == idx">
+                    <div class="form-group">
+                        <input type="date" value="{{newEvent.DateStart}}">
+                    </div>
+                </td>
+                <td *ngIf="idxEventToUpdate == idx">
+                    <div class="form-group">
+                        <input type="date" value="{{newEvent.DateEnd}}">
+                    </div>
+                </td>
+                <td *ngIf="idxEventToUpdate == idx">
+                    <button type="button" class="btn btn-success" (click)="saveUpdatedEvent(event.ID)">
+                        <i class="bi bi-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="cancelUpdateEvent()">
+                        <i class="bi bi-x-square-fill"></i>
+                    </button>
+                </td>
+                
+                <!-- ROW IN NORMAL MODE -->
+                <td *ngIf="idxEventToUpdate != idx">
+                    {{ event.Title }}
+                </td>
+                <td *ngIf="idxEventToUpdate != idx">{{ event.TypeName }}</td>
+                <td *ngIf="idxEventToUpdate != idx">{{ event.DateStart }}</td>
+                <td *ngIf="idxEventToUpdate != idx">{{ event.DateEnd }}</td>
+                <td *ngIf="idxEventToUpdate != idx">
+                    <button type="button" class="btn btn-primary" (click)="showUpdateEvent(idx)">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                </td>
+            </tr>
+
+            <!-- SHOW ADD NEW EVENT -->
+            <tr *ngIf="!showAddRow">
+                <td colspan="6">
+                    <button type="button" class="btn btn-primary center" (click)="showAddNewEvent()">
+                        <i class="bi bi-plus-circle-fill"></i>
+                        Add New Event
+                    </button>
+                </td>
+            </tr>
+
+            <!-- ADD NEW EVENT ROW -->
+            <tr *ngIf="showAddRow">
+                <td>
+
+                </td>
+                <td>
+                    <input class="form-control form-control" type="text" (keyup)="setData(1,$event)">
+                </td>
+                <td>
+                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" (input)="setData(2,$event)">
+                        <option *ngFor="let eventType of eventsType" value="{{eventType.ID}}">{{eventType.TypeName}}</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="date" (input)="setData(3,$event)">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input type="date" (input)="setData(4,$event)">
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success" (click)="saveEvent()">
+                        <i class="bi bi-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="cancelAddEvent()">
+                        <i class="bi bi-x-square-fill"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="eventDetail" tabindex="-1" role="dialog" aria-labelledby="eventDetailLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventDetailLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="!showUpdateFromDetail">
+                    ID = {{ eventDetail.ID }} <br>
+                    Data inserimento = {{ eventDetail.ID }} <br>
+                    Data Inizio evento = {{ eventDetail.ID }} <br>
+                    Data Fine Evento = {{ eventDetail.ID }} <br>
+                    Tipo Evento = {{ eventDetail.ID }} <br>
+                    <button type="button" class="btn btn-primary" (click)="showModificationMode()">
+                        <i class="bi bi-pencil-square"></i>
+                        Open modification mode
+                    </button>
+                </div>
+                <div *ngIf="showUpdateFromDetail">
+                    ID = <input class="form-control form-control" type="text" placeholder="Title"
+                        value="{{ eventDetail.ID }}" disabled="true"> <br>
+                    Data inserimento = <input class="form-control form-control" type="text" placeholder="Title"
+                        value="{{ eventDetail.ID }}" disabled="true"> <br>
+                    Data Inizio evento = {{ eventDetail.ID }} <br>
+                    Data Fine Evento = {{ eventDetail.ID }} <br>
+                    Tipo Evento = {{ eventDetail.ID }} <br>
+                    <button type="button" class="btn btn-success" (click)="saveUpdatedEvent(eventDetail.ID)">
+                        <i class="bi bi-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="cancelUpdateEvent()">
+                        <i class="bi bi-x-square-fill"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
