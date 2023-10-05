@@ -1,0 +1,63 @@
+<div layout="row">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="eventsDataSource" matSort (matSortChange)="announceSortChange($event)" #eventTableSort>
+    
+            <ng-container matColumnDef="ID">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef class="colum-w-s"> # </th>
+                <td mat-cell *matCellDef="let event" class="colum-w-s" sticky> 
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <div fxFlex="75">
+                            <button mat-icon-button (click)="showDetail(event)">
+                                <mat-icon>open_in_new</mat-icon>
+                            </button>
+                        </div>
+                        <div fxFlex="25">
+                            <span class="inline-with-btn">{{event.ID}}</span>
+                        </div>
+                    </div>                    
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Title">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let event"> {{event.Title}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="TypeName">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Event Type Name </th>
+                <td mat-cell *matCellDef="let event"> {{event.TypeName}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="DateStart">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Date Start </th>
+                <td mat-cell *matCellDef="let event"> {{UtilityFunction.formatDate(event.DateStart)}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="DateEnd">
+                <th mat-header-cell mat-sort-header *matHeaderCellDef> Date End </th>
+                <td mat-cell *matCellDef="let event"> {{UtilityFunction.formatDate(event.DateEnd)}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Controls" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let event">  
+                    <button mat-icon-button color="primary" (click)="showDetail(event)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="showAddNewEvent()">
+                        <mat-icon>add_circle_outline</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteEvent(event)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+        </table>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page" #eventTablePaginator> </mat-paginator>
+    </div>
+</div>
