@@ -1,0 +1,2 @@
+select my_events.ID, my_events.Title, my_events.DateCreate, my_events.ID_Type, events_type.TypeName, my_events.DateStart, my_events.DateEnd
+from my_events inner join events_type on my_events.ID_Type = events_type.ID

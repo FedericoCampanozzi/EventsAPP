@@ -1,0 +1,1 @@
+DELETE FROM my_events WHERE my_events.ID = @ID

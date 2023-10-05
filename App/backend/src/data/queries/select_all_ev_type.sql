@@ -1,0 +1,1 @@
+select ID, TypeName from dbo.events_type
