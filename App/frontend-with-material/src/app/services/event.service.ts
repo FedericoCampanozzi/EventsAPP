@@ -22,7 +22,9 @@ export class EventService {
 
   constructor(
     private httpClient: HttpClient,
-    public snackbar: MatSnackBar) { }
+    public snackbar: MatSnackBar) { 
+      
+    }
   
   private callGetAPI<T>(method: string, params?: string) {
     return UtilityFunction.callGetAPI<T>(this.httpClient, this.snackbar, this.url, method, params);
@@ -37,7 +39,7 @@ export class EventService {
   }
 
   insertEvent(newEvent: EventDTO){
-    return this.callPostAPI(this.Insert, JSON.stringify(newEvent));
+    return this.httpClient.put(this.Insert, JSON.stringify(newEvent));
   }
 
   getEvents() {

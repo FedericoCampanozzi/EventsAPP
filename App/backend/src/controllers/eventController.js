@@ -5,7 +5,6 @@ const eventData = require('../data');
 const deleteEvent = async (req, res, next) => {
     try {
         const eventId = req.query.id;
-        console.log("id=",req.query.id);
         const result = await eventData.deleteEvent(eventId);
         res.send(result);
     } catch (error) {
