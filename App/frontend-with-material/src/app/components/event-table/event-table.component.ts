@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { EventDetailDialogComponent } from '../event-detail-dialog/event-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilityFunction } from '../../utility-function';
@@ -29,7 +28,6 @@ export class EventTableComponent implements OnInit, AfterViewInit {
   public constructor(
     private EventService: EventService,
     private _liveAnnouncer: LiveAnnouncer,
-    private _snackBar: MatSnackBar,
     private matDialog: MatDialog
   ) {
 
@@ -51,14 +49,7 @@ export class EventTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.EventService.getEvents().subscribe(
-      (resp: any) => {
-        this.eventsDataSource.data = resp;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+   this.getEventsWithAPI();
   }
 
   showAddNewEvent() {
@@ -67,7 +58,8 @@ export class EventTableComponent implements OnInit, AfterViewInit {
         Event: new EventDTO(),
         IsAddMode: true
       },
-    });
+    }).afterClosed()
+    .subscribe(()=>{ this.getEventsWithAPI()});
   }
 
   showDetail(ee: EventDTO) {
@@ -76,19 +68,23 @@ export class EventTableComponent implements OnInit, AfterViewInit {
         Event: EventDTO.copy(ee),
         IsAddMode: false
       },
-    });
+    }).afterClosed()
+    .subscribe(()=>{ this.getEventsWithAPI()});;
   }
 
   deleteEvent(event: EventDTO){
-    this.EventService.deleteEvent(event.ID).subscribe(()=>{
-      this.EventService.getEvents().subscribe(
-        (resp: any) => {
-          this.eventsDataSource.data = resp;
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    });
+    this.EventService.deleteEvent(event.ID)
+    .subscribe(()=>{ this.getEventsWithAPI()});
+  }
+
+  private getEventsWithAPI(){
+    this.EventService.getEvents().subscribe(
+      (resp: any) => {
+        this.eventsDataSource.data = resp;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

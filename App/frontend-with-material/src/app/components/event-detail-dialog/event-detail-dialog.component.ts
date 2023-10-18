@@ -17,23 +17,22 @@ export class EventDetailDialogComponent {
   editMode = false;
   addMode = false;
   eventsType: EventTypeDTO[] = [];
-  
+
   public constructor (
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<EventDetailDialogComponent>,
     private EventService: EventService) {
-
     this.e = data.Event;
     this.addMode = data.IsAddMode;    
     this.EventService.getEventsType().subscribe(
-      (resp: any) => {
+      (resp: any) => {        
+        if (this.e.ID_Type == -1) this.e.ID_Type = resp[0].ID;
         this.eventsType = resp;
       },
       (error) => {
         console.error(error);
       }
-    );
-    
+    );    
   }
 
   onConfirmClick(): void {

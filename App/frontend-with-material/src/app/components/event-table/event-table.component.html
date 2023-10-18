@@ -6,14 +6,7 @@
                 <th mat-header-cell mat-sort-header *matHeaderCellDef class="colum-w-s"> # </th>
                 <td mat-cell *matCellDef="let event" class="colum-w-s" sticky> 
                     <div fxLayout="row" fxLayoutAlign="center center">
-                        <div fxFlex="75">
-                            <button mat-icon-button (click)="showDetail(event)">
-                                <mat-icon>open_in_new</mat-icon>
-                            </button>
-                        </div>
-                        <div fxFlex="25">
-                            <span class="inline-with-btn">{{event.ID}}</span>
-                        </div>
+                        <span class="inline-with-btn">{{event.ID}}</span>
                     </div>                    
                 </td>
             </ng-container>
@@ -57,7 +50,15 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             
         </table>
-    
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page" #eventTablePaginator> </mat-paginator>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxFlex="20" *ngIf="eventsDataSource.data.length == 0">
+                <button mat-flat-button color="primary" (click)="showAddNewEvent()" class="w-100">
+                    <mat-icon>add_circle_outline</mat-icon> <span>Add New Event</span>
+                </button>
+            </div>
+            <div fxFlex="80">
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page" #eventTablePaginator> </mat-paginator>
+            </div>
+        </div>
     </div>
 </div>

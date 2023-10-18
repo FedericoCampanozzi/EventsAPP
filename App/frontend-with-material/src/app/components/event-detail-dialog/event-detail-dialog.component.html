@@ -18,7 +18,7 @@
             <mat-label>Data Create</mat-label>
             <input matInput placeholder="" [disabled]="true" [(ngModel)]="e.DateCreate" name="DateCreate">
         </mat-form-field>
-        <mat-form-field class="full-w">
+        <mat-form-field class="full-w" *ngIf="eventsType.length > 0">
             <mat-label>Event Type</mat-label>
             <mat-select [(value)]="e.ID_Type" [disabled]="!(editMode || addMode)">
                 <mat-option *ngFor="let et of eventsType" [value]="et.ID">
