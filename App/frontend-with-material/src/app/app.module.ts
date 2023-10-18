@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventService } from './services/event.service';
-import { EventhandlerComponent } from './components/eventhandler/eventhandler.component';
+import { EventTableComponent } from './components/event-table/event-table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { EventdetailComponent } from './components/eventdetail/eventdetail.component';
+import { EventDetailDialogComponent } from './components/event-detail-dialog/event-detail-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatButtonModule } from '@angular/material/button';
@@ -26,8 +26,8 @@ import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
-    EventhandlerComponent,
-    EventdetailComponent
+    EventTableComponent,
+    EventDetailDialogComponent
   ],
   imports: [
     BrowserModule,

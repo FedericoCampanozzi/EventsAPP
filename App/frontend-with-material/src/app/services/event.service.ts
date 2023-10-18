@@ -39,7 +39,7 @@ export class EventService {
   }
 
   insertEvent(newEvent: EventDTO){
-    return this.httpClient.put(this.Insert, JSON.stringify(newEvent));
+    return this.callPostAPI(this.Insert, JSON.stringify(newEvent));
   }
 
   getEvents() {

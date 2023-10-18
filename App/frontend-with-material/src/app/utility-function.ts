@@ -26,7 +26,6 @@ export class UtilityFunction {
         } else {
           complete_uri = api + "/" + method;
         }
-        console.log("URL=",complete_uri," (GET)");
         return client.get<T>(complete_uri)
           .pipe(
             map((data: any) => {
@@ -40,8 +39,12 @@ export class UtilityFunction {
     }  
 
     static callPostAPI<T>(client: HttpClient, snackbar: MatSnackBar, api: string, method: string, jsonParams: string) {
-        console.log("URL=",api + "/" + method, "(POST)");
-        return client.post<T>(api + "/" + method, jsonParams)
+        const headers = new HttpHeaders()
+          .set('Authorization', 'my-auth-token')
+          .set('Content-Type', 'application/json');
+        return client.post<T>(api + "/" + method, jsonParams,{
+            headers: headers
+          })
           .pipe(
             map((data: any) => {
               return JSON.parse(data);

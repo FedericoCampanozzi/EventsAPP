@@ -12,7 +12,7 @@ const deleteEvent = async (req, res, next) => {
     }
 }
 
-const putEvent = async (req, res, next) => {
+const insertEvent = async (req, res, next) => {
     try {
         const result = await eventData.insertEvent(req.body);
         res.send(result);
@@ -49,5 +49,5 @@ const getEventsType = async (req, res, next) => {
 }
 
 module.exports = {
-    deleteEvent, putEvent, updateEvent, getEvents, getEventsType
+    deleteEvent, insertEvent, updateEvent, getEvents, getEventsType
 }
