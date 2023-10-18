@@ -7,11 +7,11 @@ import { EventTypeDTO } from 'src/app/interfaces/event-type.dto';
 
 
 @Component({
-  selector: 'app-eventdetail',
-  templateUrl: './eventdetail.component.html',
-  styleUrls: ['./eventdetail.component.scss'],
+  selector: 'app-event-detail-dialog',
+  templateUrl: './event-detail-dialog.component.html',
+  styleUrls: ['./event-detail-dialog.component.scss'],
 })
-export class EventdetailComponent {
+export class EventDetailDialogComponent {
   UtilityFunction: UtilityFunction = new UtilityFunction();
   e : EventDTO;
   editMode = false;
@@ -20,7 +20,7 @@ export class EventdetailComponent {
   
   public constructor (
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<EventdetailComponent>,
+    private dialogRef: MatDialogRef<EventDetailDialogComponent>,
     private EventService: EventService) {
 
     this.e = data.Event;
@@ -43,13 +43,15 @@ export class EventdetailComponent {
   changeMode(save: boolean){
     if(this.addMode){
       if(save){
-        this.EventService.insertEvent(this.e);
+        this.EventService.insertEvent(this.e)
+        .subscribe(() => {});
       }
       this.dialogRef.close(true);
     }
     else {
       if(this.editMode && save){
-        this.EventService.updateEvent(this.e);
+        this.EventService.updateEvent(this.e)
+        .subscribe(() => {});
       }
       this.editMode = !this.editMode;
     }

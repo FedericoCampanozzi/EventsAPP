@@ -1,22 +1,21 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { EventService } from '../../services/event.service';
 import { EventDTO } from '../../interfaces/event.dto';
-import { EventTypeDTO } from '../../interfaces/event-type.dto';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { EventdetailComponent } from '../eventdetail/eventdetail.component';
+import { EventDetailDialogComponent } from '../event-detail-dialog/event-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilityFunction } from '../../utility-function';
 
 @Component({
-  selector: 'app-eventhandler',
-  templateUrl: './eventhandler.component.html',
-  styleUrls: ['./eventhandler.component.scss']
+  selector: 'app-event-table',
+  templateUrl: './event-table.component.html',
+  styleUrls: ['./event-table.component.scss']
 })
-export class EventhandlerComponent implements OnInit, AfterViewInit {
+export class EventTableComponent implements OnInit, AfterViewInit {
   UtilityFunction: UtilityFunction = new UtilityFunction();
 
   displayedColumns: string[] = ["ID","Title","TypeName","DateStart","DateEnd","Controls"]
@@ -63,7 +62,7 @@ export class EventhandlerComponent implements OnInit, AfterViewInit {
   }
 
   showAddNewEvent() {
-    this.matDialog.open(EventdetailComponent, {
+    this.matDialog.open(EventDetailDialogComponent, {
       data: {
         Event: new EventDTO(),
         IsAddMode: true
@@ -71,16 +70,25 @@ export class EventhandlerComponent implements OnInit, AfterViewInit {
     });
   }
 
-  showDetail(event: EventDTO) {
-    this.matDialog.open(EventdetailComponent, {
+  showDetail(ee: EventDTO) {
+    this.matDialog.open(EventDetailDialogComponent, {
       data: {
-        Event: event,
+        Event: EventDTO.copy(ee),
         IsAddMode: false
       },
     });
   }
 
   deleteEvent(event: EventDTO){
-    this.EventService.deleteEvent(event.ID);
+    this.EventService.deleteEvent(event.ID).subscribe(()=>{
+      this.EventService.getEvents().subscribe(
+        (resp: any) => {
+          this.eventsDataSource.data = resp;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    });
   }
 }
