@@ -1,3 +1,4 @@
+USE events_manager;
 DROP TABLE IF EXISTS my_events;
 DROP TABLE IF EXISTS events_type;
 

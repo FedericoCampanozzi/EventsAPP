@@ -1,9 +1,14 @@
 'use strict';
 
+let envfile = "";
+process.argv.forEach(function (val, index, array) {
+  if(index == 2) envfile = val;
+});
 const dotenv = require('dotenv');
 const assert = require('assert');
+const { env } = require('process');
 
-dotenv.config();
+dotenv.config({ path: `./.env.${envfile}` });
 
 const { PORT, HOST, HOST_URL, SQL_USER, SQL_PASSWORD, SQL_DATABASE, SQL_SERVER } = process.env;
 

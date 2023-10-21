@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start-r": "node ./src/index.js remote.aruba",
+    "start-l": "node ./src/index.js local"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
