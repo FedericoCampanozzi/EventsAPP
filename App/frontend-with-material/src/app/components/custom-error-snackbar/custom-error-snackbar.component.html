@@ -1,0 +1,9 @@
+<div>
+    <h1>
+        {{title}}
+    </h1>
+</div>
+<div class="erroe-message">
+    {{message}}
+</div>
+<button mat-icon-button (click)="snackBar.dismiss()" *ngIf="showCloseBtn" class="close-button" color="warn"><mat-icon>close</mat-icon></button>

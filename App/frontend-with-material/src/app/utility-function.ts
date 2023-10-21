@@ -1,9 +1,16 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { map, catchError, of } from "rxjs";
+import { CustomErrorSnackbarComponent } from "./components/custom-error-snackbar/custom-error-snackbar.component";
 
 export class UtilityFunction {
-    static timeSnackbar: number | undefined;
+    static timeSnackbar: number | undefined = 10000; //10 second
+    static config: MatSnackBarConfig = {
+      duration: this.timeSnackbar,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    };
+
     public formatDate(dataStr: string): string {
         return UtilityFunction.formatDate(dataStr);
     }
@@ -32,7 +39,7 @@ export class UtilityFunction {
               return data;
             }),
             catchError(err => {
-              snackbar.open(err.error && err.error !== "" ? err.error : err.message, "", { duration: this.timeSnackbar });
+              this.callErrorSnackBar(snackbar, "Error Occurs", err.error.text)
               return of([]);
             })
         );
@@ -50,9 +57,20 @@ export class UtilityFunction {
               return JSON.parse(data);
             }),
             catchError(err => {
-              snackbar.open(err.error && err.error !== "" ? err.error : err.message, "", { duration: this.timeSnackbar });
+              this.callErrorSnackBar(snackbar, "Error Occurs", err.error.text)
               return of([]);
             })
         );
+    }
+
+    private static callErrorSnackBar(snackbar: MatSnackBar, title: string, message:string){    
+      snackbar.openFromComponent(CustomErrorSnackbarComponent,{
+          data: {
+            Title: title,
+            Message: message,
+            ShowCloseBtn: true,
+          },
+          ...this.config
+        });
     }
 }

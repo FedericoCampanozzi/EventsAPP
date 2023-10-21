@@ -21,13 +21,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-
+import { CustomErrorSnackbarComponent } from './components/custom-error-snackbar/custom-error-snackbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventTableComponent,
-    EventDetailDialogComponent
+    EventDetailDialogComponent,
+    CustomErrorSnackbarComponent
   ],
   imports: [
     BrowserModule,
