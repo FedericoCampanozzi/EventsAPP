@@ -8,14 +8,14 @@ const dotenv = require('dotenv');
 const assert = require('assert');
 const { env } = require('process');
 
-dotenv.config({ path: `./.env.${envfile}` });
+//dotenv.config({ path: `./.env.${envfile}` });
 
 const { PORT, HOST, HOST_URL, SQL_USER, SQL_PASSWORD, SQL_DATABASE, SQL_SERVER } = process.env;
 
 const sqlEncrypt = process.env.ENCRYPT === "true";
-
-assert(PORT, 'PORT is required');
-assert(HOST, 'HOST is required');
+console.log("this.port=",this.port, ";this.host=",this.host);
+//assert(PORT, 'PORT is required');
+//assert(HOST, 'HOST is required');
 
 const configuration = {
   port: PORT,
