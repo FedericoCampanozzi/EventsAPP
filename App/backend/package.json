@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-r": "node ./src/index.js remote.aruba",
-    "start-l": "node ./src/index.js local"
+    "dev": "nodemon --trace-deprecation ./src/index.js remote.aruba"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
