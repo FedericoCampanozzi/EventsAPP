@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const config = require('./config');
 const cors = require('cors');
@@ -10,8 +8,6 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 
 const app = express();
-
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api', eRouters.routers);
 
@@ -47,4 +43,4 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
-app.listen(config.port, ()=> console.log('Server is listening on port ' + config.url ));
+app.listen(config.PORT, ()=> console.log('Server is listening on port ' + config.URL ));

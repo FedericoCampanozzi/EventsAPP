@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const eController = require('../controllers/eventController');
 const router = express.Router();

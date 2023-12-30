@@ -1,5 +1,3 @@
-'use strict';
-
 const eventData = require('../data');
 
 const deleteEvent = async (req, res, next) => {

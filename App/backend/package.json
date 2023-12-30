@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --trace-deprecation ./src/index.js remote.aruba"
+    "dev": "nodemon --trace-deprecation ./src/index.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -12,8 +12,9 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "fs-extra": "^11.1.1",
-    "mssql": "^10.0.1",
     "nodemon": "^3.0.1",
+    "pg": "^8.11.3",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-stats": "^0.99.7",
     "swagger-ui-express": "^5.0.0"
   }

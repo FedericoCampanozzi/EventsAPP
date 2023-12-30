@@ -1,8 +1,6 @@
-'use strict';
-
 const utils = require('./utils');
 const config = require('../config');
-const sql = require('mssql');
+const sql = require('pg');
 
 const deleteEvent = async(eventId) => {
     try{
