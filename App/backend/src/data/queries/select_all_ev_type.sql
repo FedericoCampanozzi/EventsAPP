@@ -1,1 +1,1 @@
-select ID, TypeName from dbo.events_type
+select id, typename from events_type

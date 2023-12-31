@@ -3,8 +3,6 @@ import { EventService } from '../../services/event.service';
 import { EventDTO } from '../../interfaces/event.dto';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort, Sort } from '@angular/material/sort';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { EventDetailDialogComponent } from '../event-detail-dialog/event-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilityFunction } from '../../utility-function';
@@ -20,30 +18,19 @@ export class EventTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ["ID","Title","TypeName","DateStart","DateEnd","Controls"]
   eventsDataSource = new MatTableDataSource<EventDTO>();
   @ViewChild("eventTablePaginator") paginator?: MatPaginator = undefined;
-  @ViewChild(MatSort) sort?: MatSort = undefined;
   
   eventDetail: EventDTO = new EventDTO();
   newEvent: EventDTO = new EventDTO();
 
   public constructor(
     private EventService: EventService,
-    private _liveAnnouncer: LiveAnnouncer,
     private matDialog: MatDialog
   ) {
 
   }
 
-  announceSortChange(sortState: Sort) {
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
-
   ngAfterViewInit() {
-    if(this.sort != undefined && this.paginator != undefined){
-      this.eventsDataSource.sort = this.sort;
+    if(this.paginator != undefined){
       this.eventsDataSource.paginator = this.paginator;
     }
   }
@@ -73,7 +60,7 @@ export class EventTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteEvent(event: EventDTO){
-    this.EventService.deleteEvent(event.ID)
+    this.EventService.deleteEvent(event.id)
     .subscribe(()=>{ this.getEventsWithAPI()});
   }
 

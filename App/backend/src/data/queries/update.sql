@@ -1,3 +1,3 @@
 UPDATE my_events
-SET Title = @Title, ID_Type = @ID_Type, DateStart = @DateStart, DateEnd = @DateEnd
-WHERE ID = @ID
+SET  title = $1, idtype = $2, datestart = $3, dateend = $4
+WHERE id = $5

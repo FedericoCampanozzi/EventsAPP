@@ -4,25 +4,25 @@
             <div fxFlex="25">
                 <mat-form-field class="full-w">
                     <mat-label>Event ID</mat-label>
-                    <input matInput placeholder="ID" [disabled]="true" [(ngModel)]="e.ID" name="ID">
+                    <input matInput placeholder="ID" [disabled]="true" [(ngModel)]="e.id" name="ID">
                 </mat-form-field>
             </div>
             <div fxFlex="75">
                 <mat-form-field class="full-w">
                     <mat-label>Event Title</mat-label>
-                    <input matInput placeholder="Title" [disabled]="!(editMode || addMode)" [(ngModel)]="e.Title" name="Title">
+                    <input matInput placeholder="Title" [disabled]="!(editMode || addMode)" [(ngModel)]="e.title" name="Title">
                 </mat-form-field>
             </div>
         </div>
         <mat-form-field class="full-w">
             <mat-label>Data Create</mat-label>
-            <input matInput placeholder="" [disabled]="true" [(ngModel)]="e.DateCreate" name="DateCreate">
+            <input matInput placeholder="" [disabled]="true" [(ngModel)]="e.datecreate" name="DateCreate">
         </mat-form-field>
         <mat-form-field class="full-w" *ngIf="eventsType.length > 0">
             <mat-label>Event Type</mat-label>
-            <mat-select [(value)]="e.ID_Type" [disabled]="!(editMode || addMode)">
-                <mat-option *ngFor="let et of eventsType" [value]="et.ID">
-                    {{ et.TypeName }}
+            <mat-select [(value)]="e.idtype" [disabled]="!(editMode || addMode)">
+                <mat-option *ngFor="let et of eventsType" [value]="et.id">
+                    {{ et.typename }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -30,7 +30,7 @@
             <div fxFlex="50">
                 <mat-form-field class="full-w">
                     <mat-label>From</mat-label>
-                    <input matInput [matDatepicker]="DateStartPicker" [disabled]="!(editMode || addMode)" [(ngModel)]="e.DateStart" name="DateStart">
+                    <input matInput [matDatepicker]="DateStartPicker" [disabled]="!(editMode || addMode)" [(ngModel)]="e.datestart" name="DateStart">
                     <mat-datepicker-toggle matIconSuffix [for]="DateStartPicker"></mat-datepicker-toggle>
                     <mat-datepicker #DateStartPicker [disabled]="!(editMode || addMode)"></mat-datepicker>
                 </mat-form-field>
@@ -38,7 +38,7 @@
             <div fxFlex="50">
                 <mat-form-field class="full-w">
                     <mat-label>To</mat-label>
-                    <input matInput [matDatepicker]="DateEndPicker" [disabled]="!(editMode || addMode)" [(ngModel)]="e.DateEnd" name="DateEnd">
+                    <input matInput [matDatepicker]="DateEndPicker" [disabled]="!(editMode || addMode)" [(ngModel)]="e.dateend" name="DateEnd">
                     <mat-datepicker-toggle matIconSuffix [for]="DateEndPicker"></mat-datepicker-toggle>
                     <mat-datepicker #DateEndPicker [disabled]="!(editMode || addMode)"></mat-datepicker>
                 </mat-form-field>

@@ -54,7 +54,8 @@ export class UtilityFunction {
           })
           .pipe(
             map((data: any) => {
-              return JSON.parse(data);
+              if (data.length == 0) return [];
+              else return JSON.parse(data);
             }),
             catchError(err => {
               this.callErrorSnackBar(snackbar, "Error Occurs", err.error.text)

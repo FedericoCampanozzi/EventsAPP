@@ -1,2 +1,2 @@
-select my_events.ID, my_events.Title, my_events.DateCreate, my_events.ID_Type, events_type.TypeName, my_events.DateStart, my_events.DateEnd
-from my_events inner join events_type on my_events.ID_Type = events_type.ID
+select  my_events.id,  my_events.title,  my_events.datecreate, my_events.idtype, events_type.typename, my_events.datestart, my_events.dateend
+from my_events inner join events_type on my_events.idtype = events_type.id

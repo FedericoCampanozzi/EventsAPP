@@ -14,7 +14,4 @@ const pg_client = new Client({
 
 pg_client.connect();
 
-module.exports = {
-  'URL' : URL,
-  'PORT' : PORT
-}
+module.exports = { URL, PORT, sql : pg_client }

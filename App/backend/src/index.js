@@ -9,21 +9,22 @@ const swaggerJsDoc = require('swagger-jsdoc');
 
 const app = express();
 
-app.use('/api', eRouters.routers);
-
-app.use(bodyParser.urlencoded({extended: true}) );
-
-app.all("/*", function(req, res, next){
+// Enable CORS for all routes
+app.all("/*", function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   next();
 });
 
-app.use(express.json());
-app.use(cors());
+// Body parsing middleware for JSON and url-encoded data
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// Enable CORS using the cors() middleware
+app.use(cors());
+
+// Mount your routers under the '/api' path
 app.use('/api', eRouters.routers);
 
 const swaggerOptions = {

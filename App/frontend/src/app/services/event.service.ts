@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../environments/environment';
 import { EventDTO } from '../interfaces/event.dto';
 import { UtilityFunction } from '../utility-function';
 import { EventTypeDTO } from '../interfaces/event-type.dto';
@@ -18,7 +17,7 @@ export class EventService {
   private EventsType = "api/event-type/get"
   // ****************************************
 
-  url: string = environment.apiURL;
+  url: string = "http://localhost:8080";
 
   constructor(
     private httpClient: HttpClient,

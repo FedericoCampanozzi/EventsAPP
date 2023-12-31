@@ -26,7 +26,7 @@ export class EventDetailDialogComponent {
     this.addMode = data.IsAddMode;    
     this.EventService.getEventsType().subscribe(
       (resp: any) => {        
-        if (this.e.ID_Type == -1) this.e.ID_Type = resp[0].ID;
+        if (this.e.idtype == -1) this.e.idtype = resp[0].idtype;
         this.eventsType = resp;
       },
       (error) => {

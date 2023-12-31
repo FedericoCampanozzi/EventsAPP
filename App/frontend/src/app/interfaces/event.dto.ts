@@ -1,32 +1,32 @@
 export class EventDTO {
-    ID: number;
-    Title: string;
-    DateCreate: Date;
-    ID_Type: number;
-    TypeName: string;
-    DateStart: Date;
-    DateEnd: Date;
+    id: number;
+    title: string;
+    datecreate: Date;
+    idtype: number;
+    typename: string;
+    datestart: Date;
+    dateend: Date;
 
     public constructor(){
-        this.ID = -1;
-        this.Title = "";
-        this.DateCreate = new Date();
-        this.ID_Type = -1;
-        this.TypeName = "";
-        this.DateStart = new Date();
-        this.DateEnd = new Date();
+        this.id = -1;
+        this.title = "";
+        this.datecreate = new Date();
+        this.idtype = -1;
+        this.typename = "";
+        this.datestart = new Date();
+        this.dateend = new Date();
     }
 
     static copy(copy: EventDTO){
         let e: EventDTO = new EventDTO();
 
-        e.ID = copy.ID;
-        e.Title = copy.Title;
-        e.DateCreate = copy.DateCreate;
-        e.ID_Type = copy.ID_Type;
-        e.TypeName = copy.TypeName;
-        e.DateStart = copy.DateStart;
-        e.DateEnd = copy.DateEnd;
+        e.id = copy.id;
+        e.title = copy.title;
+        e.datecreate = copy.datecreate;
+        e.idtype = copy.idtype;
+        e.typename = copy.typename;
+        e.datestart = copy.datestart;
+        e.dateend = copy.dateend;
 
         return e;
     }

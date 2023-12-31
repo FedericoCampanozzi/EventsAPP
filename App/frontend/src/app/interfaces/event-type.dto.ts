@@ -1,9 +1,9 @@
 export class EventTypeDTO {
-    ID: number;
-    TypeName: string;
+    id: number;
+    typename: string;
 
     public constructor(){
-        this.ID = 0;
-        this.TypeName = "";
+        this.id = 0;
+        this.typename = "";
     }
 }
